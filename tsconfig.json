@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "NodeNext",
+    "moduleResolution": "Node",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "outDir": "dist",
+    "noImplicitAny": true
+  },
+  "include": ["src/**/*", "index.ts"]
+}
