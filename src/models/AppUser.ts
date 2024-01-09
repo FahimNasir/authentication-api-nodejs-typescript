@@ -2,37 +2,37 @@ import mongoose from "mongoose";
 
 interface IAppUser {
   fullName: string;
-  email: string;
+  emailAddress: string;
   isActive: boolean;
   isLoggedIn: boolean;
-  mobileNo: string;
   role: string;
+  password: string;
 }
 
 const appUserSchema = new mongoose.Schema(
   {
+    emailAddress: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
     fullName: {
       type: String,
       required: true,
     },
-    email: {
-      type: String,
+    isLoggedIn: {
+      type: Boolean,
       required: true,
     },
     isActive: {
       type: Boolean,
       required: true,
     },
-    mobileNo: {
-      type: Date,
-      required: true,
-    },
     role: {
       type: String,
-      required: true,
-    },
-    isLoggedIn: {
-      type: Boolean,
       required: true,
     },
   },
