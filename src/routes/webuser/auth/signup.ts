@@ -3,6 +3,7 @@ import { AppUser } from "../../../models/AppUser";
 import { ApiResponseDto } from "../../../dto/api-response.dto";
 import { Password } from "../../../services/password";
 import { ROLES } from "../../../common/enums";
+import jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post("/api/users/signup", async (req: Request, res: Response) => {
@@ -28,6 +29,21 @@ router.post("/api/users/signup", async (req: Request, res: Response) => {
       role: ROLES.NORMAL,
       fullName,
     });
+
+    // * Generate a JWT Token for User
+    const token = jwt.sign(
+      {
+        fullName,
+        emailAddress,
+        role: ROLES.NORMAL,
+      },
+      process.env.JWT_KEY
+    );
+
+    req.session = {
+      jwt: token,
+    };
+    // * ===========================
 
     const response = new ApiResponseDto(
       false,

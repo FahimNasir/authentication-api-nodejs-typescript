@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { AppUser } from "../../../models/AppUser";
 import { ApiResponseDto } from "../../../dto/api-response.dto";
 import { Password } from "../../../services/password";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -28,6 +29,21 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
     if (!isPasswordCorrect) {
       throw new Error("Incorrect Password provided");
     }
+
+    // * Generate a JWT Token for User
+    const token = jwt.sign(
+      {
+        fullName: existingUser[0].fullName,
+        emailAddress,
+        role: existingUser[0].role,
+      },
+      process.env.JWT_KEY
+    );
+
+    req.session = {
+      jwt: token,
+    };
+    // * ===========================
 
     // * If password is correct, login user.
     const response = new ApiResponseDto(
