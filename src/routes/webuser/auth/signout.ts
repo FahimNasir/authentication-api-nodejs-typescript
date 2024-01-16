@@ -1,10 +1,11 @@
-import express from "express";
+import { ApiResponseDto } from "../../../dto/api-response.dto";
+import express, { Request, Response } from "express";
 
 const router = express.Router();
 
-router.post("/api/users/signout", (req, res) => {
+router.post("/api/users/signout", (req: Request, res: Response) => {
   req.session = null;
-  res.send({});
+  res.status(200).send(new ApiResponseDto(false, "Logout Success", [], 200));
 });
 
 export { router as signoutRouter };

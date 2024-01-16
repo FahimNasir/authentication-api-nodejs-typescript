@@ -40,9 +40,7 @@ router.post("/api/users/signup", async (req: Request, res: Response) => {
       process.env.JWT_KEY
     );
 
-    req.session = {
-      jwt: token,
-    };
+    req.session.jwt = token;
     // * ===========================
 
     const response = new ApiResponseDto(

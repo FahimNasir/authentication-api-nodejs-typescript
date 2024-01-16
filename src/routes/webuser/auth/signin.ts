@@ -40,9 +40,7 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
       process.env.JWT_KEY
     );
 
-    req.session = {
-      jwt: token,
-    };
+    req.session.jwt = token;
     // * ===========================
 
     // * If password is correct, login user.
