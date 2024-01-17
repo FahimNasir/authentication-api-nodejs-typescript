@@ -21,6 +21,5 @@ export const requireAuth = (
       .status(401)
       .send(new ApiResponseDto(true, "Unauthorized Access", [], 401));
   }
-
   next();
 };
