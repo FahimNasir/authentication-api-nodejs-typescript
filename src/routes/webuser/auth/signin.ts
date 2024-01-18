@@ -3,8 +3,14 @@ import { AppUser } from "../../../models/AppUser";
 import { ApiResponseDto } from "../../../dto/api-response.dto";
 import { Password } from "../../../services/password";
 import jwt from "jsonwebtoken";
+import { sendEmail } from "../../../services/mailer";
 
 const router = express.Router();
+
+router.post("/api/users/testmail", async (req: Request, res: Response) => {
+  sendEmail("fahimnasir1993@gmail.com", "Test Email", "Code is 1234");
+  res.send("Completed");
+});
 
 router.post("/api/users/signin", async (req: Request, res: Response) => {
   try {
