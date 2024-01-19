@@ -8,6 +8,8 @@ import { signoutRouter } from "./routes/webuser/auth/signout";
 import { signupRouter } from "./routes/webuser/auth/signup";
 import { changePasswordRouter } from "./routes/webuser/auth/change-password";
 import globalErrorMiddleware from "./middlewares/global-error-middleware";
+import { forgotPasswordRouter } from "./routes/webuser/auth/forgot-password";
+import { verifyForgotPasswordTokenRouter } from "./routes/webuser/auth/verify-forgot-pass-token";
 
 const dotenv = require("dotenv").config();
 
@@ -27,11 +29,13 @@ app.use(signupRouter);
 app.use(signinRouter);
 app.use(changePasswordRouter);
 app.use(signoutRouter);
+app.use(forgotPasswordRouter);
+app.use(verifyForgotPasswordTokenRouter);
 
 app.all("*", async (req, res, next) => {
   throw new Error("Route not found");
 });
 
-app.use(globalErrorMiddleware);
+//app.use(globalErrorMiddleware);
 
 export { app };

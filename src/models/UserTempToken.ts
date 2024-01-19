@@ -6,7 +6,7 @@ interface IUserTempToken {
   token: string;
   isVerified: Boolean;
   expiryDate: Date;
-  eventType: EventType;
+  eventType: String;
 }
 
 const userTempTokenSchema = new mongoose.Schema(
@@ -28,7 +28,7 @@ const userTempTokenSchema = new mongoose.Schema(
       required: true,
     },
     eventType: {
-      type: EventType,
+      type: String,
       required: true,
     },
   },

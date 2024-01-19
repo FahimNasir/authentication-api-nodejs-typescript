@@ -3,7 +3,6 @@ import { AppUser } from "../../../models/AppUser";
 import { ApiResponseDto } from "../../../dto/api-response.dto";
 import { Password } from "../../../services/password";
 import jwt from "jsonwebtoken";
-import { sendEmail } from "../../../services/mailer";
 
 const router = express.Router();
 
