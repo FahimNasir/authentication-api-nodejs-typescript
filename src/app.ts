@@ -10,6 +10,7 @@ import { changePasswordRouter } from "./routes/webuser/auth/change-password";
 import globalErrorMiddleware from "./middlewares/global-error-middleware";
 import { forgotPasswordRouter } from "./routes/webuser/auth/forgot-password";
 import { verifyForgotPasswordTokenRouter } from "./routes/webuser/auth/verify-forgot-pass-token";
+import { newPasswordRouter } from "./routes/webuser/auth/new-password";
 
 const dotenv = require("dotenv").config();
 
@@ -31,6 +32,7 @@ app.use(changePasswordRouter);
 app.use(signoutRouter);
 app.use(forgotPasswordRouter);
 app.use(verifyForgotPasswordTokenRouter);
+app.use(newPasswordRouter);
 
 app.all("*", async (req, res, next) => {
   throw new Error("Route not found");
