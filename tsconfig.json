@@ -6,7 +6,8 @@
     "baseUrl": "src",
     "sourceMap": true,
     "outDir": "dist",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "types": ["cors"]
   },
   "include": ["src/**/*", "index.ts"]
 }

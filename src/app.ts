@@ -11,6 +11,7 @@ import globalErrorMiddleware from "./middlewares/global-error-middleware";
 import { forgotPasswordRouter } from "./routes/webuser/auth/forgot-password";
 import { verifyForgotPasswordTokenRouter } from "./routes/webuser/auth/verify-forgot-pass-token";
 import { newPasswordRouter } from "./routes/webuser/auth/new-password";
+import cors, { CorsOptions } from "cors";
 
 const dotenv = require("dotenv").config();
 
@@ -25,6 +26,16 @@ app.use(
     name: "auth-app-session",
   })
 );
+
+const corsOptions: CorsOptions = {
+  origin: "http://localhost:5173",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  exposedHeaders: ["Set-Cookie"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(signupRouter);
 app.use(signinRouter);

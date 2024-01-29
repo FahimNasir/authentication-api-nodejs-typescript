@@ -16,7 +16,16 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
 
     // * If user does not exist, tell user to sign up first.
     if (!existingUser || existingUser.length === 0) {
-      throw new Error(`No user found with email ${emailAddress}`);
+      return res
+        .status(400)
+        .send(
+          new ApiResponseDto(
+            true,
+            `No user found with email ${emailAddress}`,
+            [],
+            400
+          )
+        );
     }
 
     // * If user exists, check if password is correct match
@@ -27,7 +36,9 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
 
     // * If password is incorrect, throw error for incorrect password.
     if (!isPasswordCorrect) {
-      throw new Error("Incorrect Password provided");
+      return res
+        .status(400)
+        .send(new ApiResponseDto(true, "Incorrect Password provided", [], 400));
     }
 
     // * Generate a JWT Token for User
