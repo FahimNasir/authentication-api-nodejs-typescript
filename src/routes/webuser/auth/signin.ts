@@ -58,7 +58,11 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
     const response = new ApiResponseDto(
       false,
       `User logged in successfully`,
-      emailAddress,
+      {
+        emailAddress,
+        fullName: existingUser[0].fullName,
+        role: existingUser[0].role,
+      },
       200
     );
     res.status(200).send(response);

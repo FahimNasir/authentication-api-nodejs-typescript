@@ -46,7 +46,7 @@ router.post("/api/users/signup", async (req: Request, res: Response) => {
     const response = new ApiResponseDto(
       false,
       `User sign up successfully!`,
-      newUser,
+      { emailAddress, fullName, role: newUser.role },
       201
     );
     res.status(201).send(response);
