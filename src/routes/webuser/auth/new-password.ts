@@ -22,17 +22,34 @@ router.post("/api/users/new-password", async (req: Request, res: Response) => {
 
     // * if entry not found, throw error.
     if (existingUserTempToken && existingUserTempToken.length === 0) {
-      throw new Error("No verified token entry found.");
+      return res
+        .status(400)
+        .send(
+          new ApiResponseDto(true, "No verified token entry found.", [], 400)
+        );
     }
 
-    // * If user no found, throw error.
+    // * If user not found, throw error.
     const appUser = await AppUser.find({ emailAddress });
+
     if (appUser && appUser.length === 0) {
-      throw new Error(`No user found with emailAddress: ${emailAddress}`);
+      return res
+        .status(400)
+        .send(
+          new ApiResponseDto(
+            true,
+            `No user found with emailAddress: ${emailAddress}`,
+            [],
+            400
+          )
+        );
     }
 
     // * if user found, update user's password as provided newPassword.
     const hashedPassword = await Password.toHash(newPassword);
+
+    // * Implement new and previous password to be different validation here..
+
     await AppUser.findByIdAndUpdate(appUser[0].id, {
       password: hashedPassword,
     });

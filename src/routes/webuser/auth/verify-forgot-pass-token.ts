@@ -19,13 +19,29 @@ router.post(
       });
 
       if (userTempToken && userTempToken.length === 0) {
-        throw new Error(
-          `No generated token entry found for email ${emailAddress}`
-        );
+        return res
+          .status(400)
+          .send(
+            new ApiResponseDto(
+              true,
+              `No generated token entry found for email ${emailAddress}`,
+              [],
+              400
+            )
+          );
       }
 
       if (userTempToken[0].token !== token) {
-        throw new Error(`Provided token doesn't match. Incorrect Token`);
+        return res
+          .status(400)
+          .send(
+            new ApiResponseDto(
+              true,
+              `Provided token doesn't match. Incorrect Token`,
+              [],
+              400
+            )
+          );
       }
 
       // * Updating the table that token has been verified.

@@ -19,7 +19,16 @@ router.post(
       const existingUser = await AppUser.find({ emailAddress });
 
       if (existingUser && existingUser.length === 0) {
-        throw new Error(`No user exist with provided email: ${emailAddress}`);
+        return res
+          .status(400)
+          .send(
+            new ApiResponseDto(
+              true,
+              `No user exist with provided email: ${emailAddress}`,
+              [],
+              400
+            )
+          );
       }
 
       // * if user exists, send a verification code on the email.
@@ -42,7 +51,7 @@ router.post(
         `Your verification code is ${newToken}`
       );
 
-      res
+      return res
         .status(200)
         .send(
           new ApiResponseDto(
