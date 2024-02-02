@@ -28,6 +28,20 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
         );
     }
 
+    // * Check if user is already logged in
+    if (existingUser[0].isLoggedIn) {
+      return res
+        .status(400)
+        .send(
+          new ApiResponseDto(
+            true,
+            `User with email ${emailAddress} is already logged in`,
+            [],
+            400
+          )
+        );
+    }
+
     // * If user exists, check if password is correct match
     const isPasswordCorrect = await Password.compare(
       existingUser[0].password,
@@ -65,6 +79,8 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
       },
       200
     );
+
+    await AppUser.findByIdAndUpdate(existingUser[0]._id, { isLoggedIn: true });
     res.status(200).send(response);
   } catch (error) {
     const response = new ApiResponseDto(true, error.message, [], 500);
