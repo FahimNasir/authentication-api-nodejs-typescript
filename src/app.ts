@@ -12,6 +12,7 @@ import { forgotPasswordRouter } from "./routes/webuser/auth/forgot-password";
 import { verifyForgotPasswordTokenRouter } from "./routes/webuser/auth/verify-forgot-pass-token";
 import { newPasswordRouter } from "./routes/webuser/auth/new-password";
 import cors, { CorsOptions } from "cors";
+import { todoListRouter } from "./routes/webuser/todo/list";
 
 const dotenv = require("dotenv").config();
 
@@ -40,6 +41,7 @@ app.options("*", cors(corsOptions));
 app.use(signupRouter);
 app.use(signinRouter);
 app.use(changePasswordRouter);
+app.use(todoListRouter);
 app.use(signoutRouter);
 app.use(forgotPasswordRouter);
 app.use(verifyForgotPasswordTokenRouter);
