@@ -47,6 +47,10 @@ app.use(forgotPasswordRouter);
 app.use(verifyForgotPasswordTokenRouter);
 app.use(newPasswordRouter);
 
+app.use("/", async (req, res) => {
+  res.send("Auth API Working...");
+});
+
 app.all("*", async (req, res, next) => {
   throw new Error("Route not found");
 });
