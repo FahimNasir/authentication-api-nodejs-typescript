@@ -16,8 +16,8 @@ const start = async () => {
     console.log(err);
   }
 
-  app.listen(3000, () => {
-    console.log("authentication-api Listening on 3000!");
+  app.listen(3001, () => {
+    console.log("authentication-api Listening on 3001!");
   });
 };
 
