@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
-import { AppUser } from "../../../models/AppUser";
-import { ApiResponseDto } from "../../../dto/api-response.dto";
-import { Password } from "../../../services/password";
-import { ROLES } from "../../../common/enums";
+import { AppUser } from "../../models/AppUser";
+import { ApiResponseDto } from "../../dto/api-response.dto";
+import { Password } from "../../services/password";
+import { ROLES } from "../../common/enums";
 import jwt from "jsonwebtoken";
 const router = express.Router();
 
