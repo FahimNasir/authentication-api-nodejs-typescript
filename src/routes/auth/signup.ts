@@ -51,12 +51,7 @@ router.post("/api/users/signup", async (req: Request, res: Response) => {
     );
     res.status(201).send(response);
   } catch (error) {
-    const response = new ApiResponseDto(
-      true,
-      "Something went wrong while sign up. Please try again later",
-      [],
-      500
-    );
+    const response = new ApiResponseDto(true, error.message, [], 500);
     console.error(error);
     res.status(500).send(response);
   }
