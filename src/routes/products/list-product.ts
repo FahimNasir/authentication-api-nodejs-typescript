@@ -14,8 +14,11 @@ router.get(
       // * Get the query params.
       // * create the filter according to the params, if passed.
       // * Pass the filter object to Product.find query.
-      const {code} = req.query
-      const products = code ? await Product.find({code: code}) : await Product.find();
+      const { code } = req.query;
+      const products = code
+        ? await Product.find({ code: code })
+        : await Product.find();
+
       return res
         .status(200)
         .send(

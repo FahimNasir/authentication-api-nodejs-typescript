@@ -12,6 +12,8 @@ import { forgotPasswordRouter } from "./routes/auth/forgot-password";
 import { verifyForgotPasswordTokenRouter } from "./routes/auth/verify-forgot-pass-token";
 import { newPasswordRouter } from "./routes/auth/new-password";
 import { productListRouter } from "./routes/products/list-product";
+import { createOrderRouter } from "./routes/order/create-order";
+import { listOrderRouter } from "./routes/order/list-order";
 import cors, { CorsOptions } from "cors";
 
 const dotenv = require("dotenv").config();
@@ -46,6 +48,8 @@ app.use(forgotPasswordRouter);
 app.use(verifyForgotPasswordTokenRouter);
 app.use(newPasswordRouter);
 app.use(productListRouter);
+app.use(createOrderRouter);
+app.use(listOrderRouter);
 
 app.use("/", async (req, res) => {
   res.send("Auth API Working...");

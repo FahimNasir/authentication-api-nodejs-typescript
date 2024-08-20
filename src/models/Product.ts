@@ -1,10 +1,18 @@
 import mongoose, { ObjectId } from "mongoose";
 
+interface IAccessory {
+  name: string;
+  code: string;
+}
+
 interface IProduct {
   name: string;
   code: string;
   price: number;
   availableQuantity: number;
+  // * embedded relationship example
+  tags: string[];
+  accessories: IAccessory[];
   //   createdBy: ObjectId;
   //   updatedBy: ObjectId;
 }
@@ -25,6 +33,14 @@ const productSchema = new mongoose.Schema(
     },
     availableQuantity: {
       type: Number,
+      required: true,
+    },
+    tags: {
+      type: Array,
+      required: true,
+    },
+    accessories: {
+      type: Array,
       required: true,
     },
     // createdBy: {
