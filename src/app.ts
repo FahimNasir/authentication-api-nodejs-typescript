@@ -7,13 +7,9 @@ import { signinRouter } from "./routes/auth/signin";
 import { signoutRouter } from "./routes/auth/signout";
 import { signupRouter } from "./routes/auth/signup";
 import { changePasswordRouter } from "./routes/auth/change-password";
-import globalErrorMiddleware from "./middlewares/global-error-middleware";
 import { forgotPasswordRouter } from "./routes/auth/forgot-password";
 import { verifyForgotPasswordTokenRouter } from "./routes/auth/verify-forgot-pass-token";
 import { newPasswordRouter } from "./routes/auth/new-password";
-import { productListRouter } from "./routes/products/list-product";
-import { createOrderRouter } from "./routes/order/create-order";
-import { listOrderRouter } from "./routes/order/list-order";
 import cors, { CorsOptions } from "cors";
 
 const dotenv = require("dotenv").config();
@@ -31,7 +27,7 @@ app.use(
 );
 
 const corsOptions: CorsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   exposedHeaders: ["Set-Cookie"],
@@ -47,9 +43,6 @@ app.use(signoutRouter);
 app.use(forgotPasswordRouter);
 app.use(verifyForgotPasswordTokenRouter);
 app.use(newPasswordRouter);
-app.use(productListRouter);
-app.use(createOrderRouter);
-app.use(listOrderRouter);
 
 app.use("/", async (req, res) => {
   res.send("Auth API Working...");
@@ -58,7 +51,5 @@ app.use("/", async (req, res) => {
 app.all("*", async (req, res, next) => {
   throw new Error("Route not found");
 });
-
-//app.use(globalErrorMiddleware);
 
 export { app };

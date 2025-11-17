@@ -76,6 +76,7 @@ router.post("/api/users/signin", async (req: Request, res: Response) => {
         emailAddress,
         fullName: existingUser[0].fullName,
         role: existingUser[0].role,
+        token,
       },
       200
     );
