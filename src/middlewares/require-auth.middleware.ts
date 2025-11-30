@@ -6,7 +6,15 @@ export const requireAuth = (
   res: Response,
   next: NextFunction
 ) => {
-  const userToken = req.session?.jwt;
+  const authHeader = req.headers.authorization;
+  const userToken = authHeader?.split(" ")[1];
+
+  if (!userToken) {
+    return res
+      .status(401)
+      .send(new ApiResponseDto(true, "Unauthorized Access", [], 401));
+  }
+
   try {
     const payload = jwt.verify(userToken, process.env.JWT_KEY);
     if (!payload) {

@@ -11,6 +11,7 @@ import { forgotPasswordRouter } from "./routes/auth/forgot-password";
 import { verifyForgotPasswordTokenRouter } from "./routes/auth/verify-forgot-pass-token";
 import { newPasswordRouter } from "./routes/auth/new-password";
 import cors, { CorsOptions } from "cors";
+import { githubCallbackRouter } from "./routes/auth/github-callback";
 
 const dotenv = require("dotenv").config();
 
@@ -40,6 +41,7 @@ app.use(signupRouter);
 app.use(signinRouter);
 app.use(changePasswordRouter);
 app.use(signoutRouter);
+app.use(githubCallbackRouter);
 app.use(forgotPasswordRouter);
 app.use(verifyForgotPasswordTokenRouter);
 app.use(newPasswordRouter);
